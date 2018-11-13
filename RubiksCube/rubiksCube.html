@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+p {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+</style>
+</head>
+<title>Rubik's Cube</title>
+
+<script id="vertex-shader" type="x-shader/x-vertex">
+
+attribute  vec4 vPosition;
+attribute  vec4 vColor;
+varying vec4 fColor;
+
+uniform mat4 r;
+
+void main()
+{
+  vec4 p;
+
+  gl_Position = r*vPosition;
+  fColor = vColor;
+}
+</script>
+
+<script id="fragment-shader" type="x-shader/x-fragment">
+
+precision mediump float;
+
+varying vec4 fColor;
+
+void
+main()
+{
+    gl_FragColor = fColor;
+}
+</script>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="rubiksCube.js"></script>
+<script src="cubeModel.js"></script>
+
+<body>
+<p><font size="2">You can change your view of the cube by clicking and dragging anywhere in the grey. To stop the view of the cube from spinning just click and release the left mouse button in the grey.</font><p/>
+
+<br/>
+
+<p><font size="2">By clicking one of the three buttons below, you will set the degrees that the face will be rotated. (Default is 90)</font></p>
+<button id = "Rotate90">90</button>
+<button id = "Rotate180">180</button>
+<button id = "Rotate270">270</button>
+
+<br/>
+<br/>
+
+<p><font size="2">By clicking one of the two buttons below, you will set the direction that the face will be rotated. (Default is clockwise)</font><p/>
+<button id = "RotateClockwise">Clockwise</button>
+<button id = "RotateCounterClockwise">Counter-Clockwise</button>
+
+<br/>
+<br/>
+
+<p><font size="2">By clicking one of the six buttons below, you will rotate the face of the cube where the color of the center piece on that face matches the color named on the button pressed.</font><p/>
+<button id = "RotateWhiteFace">Rotate White</button>
+<button id = "RotateBlueFace">Rotate Blue</button>
+<button id = "RotateRedFace">Rotate Red</button>
+<button id = "RotateGreenFace">Rotate Green</button>
+<button id = "RotateYellowFace">Rotate Yellow</button>
+<button id = "RotateMagentaFace">Rotate Magenta</button>
+
+<br/>
+<br/>
+
+<!-- grabbed this from example in lecture-->
+<canvas id="gl-canvas" width="512"" height="512">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+
+<br/>
+<br/>
+
+<p><font size="2">Enter a numeric value into the text field below then click the Randomize Cube button below in order to make the random 'n' movements on the cube. Click the Solve Cube button below at any time to solve the cube.</font><p/>
+<input id="InputField" type="text" value="25"></input>
+<button id = "Randomize">Randomize Cube</button>
+<button id = "Solve">Solve Cube</button>
+
+<br/>
+<br/>
+
+<p><font size="2">The Reset button below will reset the entire cube making all faces solid colors again.</font><p/>
+<button id = "Reset">Reset</button>
+
+</body>
+</html>
